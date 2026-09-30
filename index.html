@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Política de seguridad de contenido: solo scripts propios (Leaflet va incluido
+       en /vendor), mosaicos de OpenStreetMap y conexiones al backend. Si el backend
+       vive en otro dominio, agrégalo a connect-src. -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org; connect-src 'self' http://localhost:* http://127.0.0.1:* https://*.onrender.com; object-src 'none'; base-uri 'self'; form-action 'self'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>HelpCare — Donaciones directas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+  <link rel="stylesheet" href="vendor/markercluster/MarkerCluster.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="saltar" href="#desk">Saltar al contenido</a>
+
+  <div class="shell">
+    <aside class="counter">
+      <a class="counter-brand" href="#/mapa">
+        <span class="brand-mark" aria-hidden="true">H</span>
+        <span>
+          <span class="brand-name">HelpCare</span>
+          <span class="brand-role">Donaciones directas</span>
+        </span>
+      </a>
+
+      <nav class="counter-nav" aria-label="Secciones">
+        <p class="nav-grupo">Explorar</p>
+        <a class="nav-item" href="#/mapa" data-ruta="mapa">Mapa de centros</a>
+        <a class="nav-item" href="#/necesidades" data-ruta="necesidades">Necesidades</a>
+        <a class="nav-item" href="#/impacto" data-ruta="impacto">Impacto</a>
+
+        <p class="nav-grupo">Tu cuenta</p>
+        <a class="nav-item" href="#/registro" data-ruta="registro" data-si="anonimo">Crear cuenta</a>
+        <a class="nav-item" href="#/login" data-ruta="login" data-si="anonimo">Iniciar sesión</a>
+        <a class="nav-item" href="#/cuenta" data-ruta="cuenta" data-si="sesion" hidden>Mi cuenta</a>
+        <a class="nav-item" href="#/mis-donaciones" data-ruta="mis-donaciones" data-si="donante" hidden>Mis donaciones</a>
+        <a class="nav-item" href="#/institucion" data-ruta="institucion" data-si="institucion" hidden>Mi institución</a>
+        <a class="nav-item" href="#/admin" data-ruta="admin" data-si="administrador" hidden>Administración</a>
+      </nav>
+
+      <div class="counter-session">
+        <p class="session-status" id="session-status">Sin iniciar sesión</p>
+        <button type="button" class="link-button" id="logout-button" hidden>Cerrar sesión</button>
+        <p class="en-vivo" id="en-vivo" hidden>Actualizando en vivo</p>
+      </div>
+
+      <details class="counter-config" id="config-servidor" hidden>
+        <summary>Conexión con el servidor</summary>
+        <label for="api-base">URL del backend</label>
+        <input type="url" id="api-base" placeholder="http://localhost:3000" />
+        <p class="config-hint">Solo en desarrollo local. Se guarda en este navegador.</p>
+      </details>
+    </aside>
+
+    <main class="desk" id="desk" tabindex="-1"></main>
+  </div>
+
+  <div class="avisos" id="avisos" role="status" aria-live="polite"></div>
+
+  <dialog class="dialogo" id="dialogo"></dialog>
+
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="vendor/markercluster/leaflet.markercluster.js"></script>
+  <script src="config.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
